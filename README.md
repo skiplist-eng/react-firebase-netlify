@@ -13,3 +13,10 @@ Skiplist React application starter kit.
 
 ## Log
 - Generated project structure using `create-react-app` 
+- Added [custom components](https://www.youtube.com/watch?v=7uf3SCgduPg)
+- Added [test rect components](https://www.youtube.com/watch?v=f6Uk0qS_Lho)
+
+
+## Interactive Debugging Using WebStorm
+
+![configuration](https://image.ibb.co/gnY5XS/Screen_Shot_2018_04_16_at_5_20_22_PM.png)
