@@ -12,7 +12,7 @@ Skiplist React application starter kit.
 
 
 ## Log
-- Generated project structure using `create-react-app` 
+- [Generated project](https://www.youtube.com/watch?v=7uf3SCgduPg) structure using `create-react-app` 
 - Added [custom components](https://www.youtube.com/watch?v=7uf3SCgduPg)
 - Added [test rect components](https://www.youtube.com/watch?v=f6Uk0qS_Lho)
 
