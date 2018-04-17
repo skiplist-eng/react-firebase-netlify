@@ -2,7 +2,7 @@
 
 Skiplist React application starter kit.
 
-**Example App:** [Skiplist React Starter Kit](https://heuristic-mahavira-52dea2.netlify.com/)
+**Example App:** [Skiplist React Starter Kit](https://heuristic-mahavira-52dea2.netlify.com/songs)
 
 ## References
 - [CoderJourney Learn React Video Tutorials](https://www.youtube.com/playlist?list=PLbG4OyfwIxjFKJE_ZVZxsSt1ESc9S7kFb)
@@ -11,6 +11,19 @@ Skiplist React application starter kit.
 
 ## Prerequisites
 - Nodejs
+
+## Environment Variables (.env)
+
+**Firebase**
+```
+REACT_APP_FIREBASE_KEY
+REACT_APP_FIREBASE_DOMAIN
+REACT_APP_FIREBASE_DATABASE
+REACT_APP_FIREBASE_PROJECT_ID
+REACT_APP_FIREBASE_STORAGE_BUCKET
+REACT_APP_FIREBASE_SENDER_ID
+```
+![firebase](https://image.ibb.co/maGOnS/image.png)
 
 ## Recommended Dev Tools
 - [WebStorm](https://www.jetbrains.com/webstorm/)

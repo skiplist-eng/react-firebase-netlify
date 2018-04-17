@@ -3,6 +3,7 @@ import {BrowserRouter, Link, Route} from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ChordEditor from './components/ChordEditor';
+import {base} from './base'
 
 
 class App extends Component {
@@ -10,10 +11,7 @@ class App extends Component {
         super();
         this.updateSong = this.updateSong.bind(this);
         this.state = {
-            songs: {
-                "1": {id: 1, chordpro: "Lyrics for song 1."},
-                "2": {id: 2, chordpro: "Lyrics for song 2."}
-            }
+            songs: {}
         };
     }
 
@@ -22,6 +20,17 @@ class App extends Component {
         songs[song.id] = song;
 
         this.setState({songs});
+    }
+
+    componentWillMount() {
+        this.songsRef = base.syncState('songs', {
+            context: this,
+            state: 'songs'
+        })
+    }
+
+    componentWillUnmount() {
+        base.removeBinding(this.songsRef);
     }
 
     render() {
