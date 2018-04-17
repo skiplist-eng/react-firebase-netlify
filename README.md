@@ -45,10 +45,15 @@ REACT_APP_FIREBASE_SENDER_ID
 - Finish `Learn React Video Tutorial`
 - Add `CircleCI`
 - Add `Google Analytics`
+- Add `Monitoring Framework (Rollbar?)`
 - Add `Acceptance Tests Framework`
 - Upgrade `@blueprint/core:^1.35.7 to ^2.x`
+- Add `Feature Toggles`
 
 
-## Interactive Debugging Using WebStorm
+## Using WebStorm
+### Interactive Debugging React JavaScript
+![javascript_react_configuration](https://image.ibb.co/grjXGn/Screen_Shot_2018_04_17_at_5_23_12_PM.png)
 
-![configuration](https://image.ibb.co/gnY5XS/Screen_Shot_2018_04_16_at_5_20_22_PM.png)
+### Interactive Debugging Jest Tests
+![jest_configuration](https://image.ibb.co/gnY5XS/Screen_Shot_2018_04_16_at_5_20_22_PM.png)
