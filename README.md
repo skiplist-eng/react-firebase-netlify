@@ -37,6 +37,16 @@ REACT_APP_FIREBASE_SENDER_ID
 - Added [test rect components](https://www.youtube.com/watch?v=f6Uk0qS_Lho)
 - Separated [state and props](https://www.youtube.com/watch?v=aKoQH9zGiqs)
 - Added [react router](https://www.youtube.com/watch?v=BImhGRTunpY) - *'components all the way down'*
+- Integrated with [firebase](https://www.youtube.com/watch?v=vmLaZafaw9E)
+- Styled with [Blueprint.js:1.35.7](https://www.youtube.com/watch?v=FI_Ek6zkqMk)
+
+
+## TODO
+- Finish `Learn React Video Tutorial`
+- Add `CircleCI`
+- Add `Google Analytics`
+- Add `Acceptance Tests Framework`
+- Upgrade `@blueprint/core:^1.35.7 to ^2.x`
 
 
 ## Interactive Debugging Using WebStorm
