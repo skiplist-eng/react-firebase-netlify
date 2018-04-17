@@ -8,11 +8,9 @@ class ChordEditor extends Component {
     }
 
     handleChange(event) {
-        const chordpro = event.target.value;
-
-        this.props.updateSong({
-            chordpro: chordpro
-        });
+        const song = {...this.props.song};
+        song.chordpro = event.target.value;
+        this.props.updateSong(song);
     }
 
     getChordMarkup() {
