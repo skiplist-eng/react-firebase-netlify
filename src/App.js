@@ -9,10 +9,23 @@ import {base} from './base'
 class App extends Component {
     constructor() {
         super();
+        this.addSong = this.addSong.bind(this);
         this.updateSong = this.updateSong.bind(this);
         this.state = {
             songs: {}
         };
+    }
+
+    addSong(title) {
+        const songs = {...this.state.songs};
+        const id = Date.now();
+        songs[id] = {
+            id: id,
+            title: title,
+            chordpro: ""
+        };
+
+        this.setState({songs});
     }
 
     updateSong(song) {
