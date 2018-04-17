@@ -12,11 +12,18 @@ Skiplist React application starter kit.
 ## Prerequisites
 - Nodejs
 
+## Recommended Dev Tools
+- [WebStorm](https://www.jetbrains.com/webstorm/)
+- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
+- ... [Vim](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+
 
 ## Log
 - [Generated project](https://www.youtube.com/watch?v=7uf3SCgduPg) structure using `create-react-app` 
 - Added [custom components](https://www.youtube.com/watch?v=7uf3SCgduPg)
 - Added [test rect components](https://www.youtube.com/watch?v=f6Uk0qS_Lho)
+- Separated [state and props](https://www.youtube.com/watch?v=aKoQH9zGiqs)
+- Added [react router](https://www.youtube.com/watch?v=BImhGRTunpY) - *'components all the way down'*
 
 
 ## Interactive Debugging Using WebStorm
