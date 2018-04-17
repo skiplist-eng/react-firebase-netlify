@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Link, Route} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ChordEditor from './components/ChordEditor';
+import SongList from './components/SongList';
 import {base} from './base'
 
 
@@ -48,23 +49,15 @@ class App extends Component {
 
     render() {
         return (
-            <div className="wrapper">
-                <Header/>
+            <div style={{maxWidth: "1160px", margin: "0 auto"}}>
                 <BrowserRouter>
-                    <div className="main-content">
+                    <div>
+                        <Header/>
+                        <div className="main-content" style={{padding: "1em"}}>
                         <div className="workspace">
                             <Route exact path="/songs" render={(props) => {
-                                const songIds = Object.keys(this.state.songs);
                                 return (
-                                    <ul>
-                                        {songIds.map((id) => {
-                                            return (
-                                                <li key={id}>
-                                                    <Link to={`/songs/${id}`}>Song {id}</Link>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
+                                    <SongList songs={this.state.songs}/>
                                 )
                             }}/>
 
@@ -77,6 +70,7 @@ class App extends Component {
                                 )
                             }}/>
                         </div>
+                    </div>
                     </div>
                 </BrowserRouter>
                 <Footer/>
