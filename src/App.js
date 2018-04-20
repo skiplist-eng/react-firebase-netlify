@@ -6,6 +6,7 @@ import ChordEditor from './components/ChordEditor';
 import SongList from './components/SongList';
 import {base} from './base'
 
+import Hotjar from './heatmap/hotjar'
 
 class App extends Component {
     constructor() {
@@ -48,6 +49,8 @@ class App extends Component {
     }
 
     render() {
+        new Hotjar().initialize();
+
         return (
             <div style={{maxWidth: "1160px", margin: "0 auto"}}>
                 <BrowserRouter>

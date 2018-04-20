@@ -25,6 +25,12 @@ REACT_APP_FIREBASE_SENDER_ID
 ```
 ![firebase](https://image.ibb.co/maGOnS/image.png)
 
+**Hotjar**
+```
+HJID  # Hotjar ID
+HJSV  # Hotjar Snippet Version
+```
+
 ## Recommended Dev Tools
 - [WebStorm](https://www.jetbrains.com/webstorm/)
 - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
