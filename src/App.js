@@ -10,6 +10,9 @@ import Logout from './components/Logout';
 
 import ChordEditor from './components/ChordEditor';
 import SongList from './components/SongList';
+
+import FullScreen from './components/fileUpload/dropzone/FullScreen'
+
 import {app, base} from './base'
 
 import Hotjar from './heatmap/hotjar'
@@ -97,7 +100,7 @@ class App extends Component {
                                 <div className="workspace">
                                     <Route exact path="/login" component={Login}/>
                                     <Route exact path="/logout" component={Logout}/>
-
+                                    <Route exact path="/dropzone" component={FullScreen}/>
                                     <Route exact path="/songs" render={(props) => {
                                         return (
                                             <SongList songs={this.state.songs}/>
