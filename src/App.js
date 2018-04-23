@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
+import Analytics from 'react-router-ga';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ChordEditor from './components/ChordEditor';
@@ -7,6 +9,7 @@ import SongList from './components/SongList';
 import {base} from './base'
 
 import Hotjar from './heatmap/hotjar'
+import GoogleAnalytics from "./analytics/googleAnalytics";
 
 class App extends Component {
     constructor() {
@@ -16,6 +19,9 @@ class App extends Component {
         this.state = {
             songs: {}
         };
+
+        this.hotjar = new Hotjar();
+        this.googleAnalytics = new GoogleAnalytics();
     }
 
     addSong(title) {
@@ -49,32 +55,32 @@ class App extends Component {
     }
 
     render() {
-        new Hotjar().initialize();
-
         return (
             <div style={{maxWidth: "1160px", margin: "0 auto"}}>
                 <BrowserRouter>
-                    <div>
-                        <Header/>
-                        <div className="main-content" style={{padding: "1em"}}>
-                        <div className="workspace">
-                            <Route exact path="/songs" render={(props) => {
-                                return (
-                                    <SongList songs={this.state.songs}/>
-                                )
-                            }}/>
+                    <Analytics id={this.googleAnalytics.gaTrackingNumber}>
+                        <div>
+                            <Header/>
+                            <div className="main-content" style={{padding: "1em"}}>
+                                <div className="workspace">
+                                    <Route exact path="/songs" render={(props) => {
+                                        return (
+                                            <SongList songs={this.state.songs}/>
+                                        )
+                                    }}/>
 
-                            <Route path="/songs/:songId" render={(props) => {
-                                const song = this.state.songs[props.match.params.songId];
-                                return (
-                                    song
-                                        ? <ChordEditor song={song} updateSong={this.updateSong}/>
-                                        : <h1>Song not found</h1>
-                                )
-                            }}/>
+                                    <Route path="/songs/:songId" render={(props) => {
+                                        const song = this.state.songs[props.match.params.songId];
+                                        return (
+                                            song
+                                                ? <ChordEditor song={song} updateSong={this.updateSong}/>
+                                                : <h1>Song not found</h1>
+                                        )
+                                    }}/>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
+                    </Analytics>
                 </BrowserRouter>
                 <Footer/>
             </div>

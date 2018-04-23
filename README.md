@@ -25,10 +25,17 @@ REACT_APP_FIREBASE_SENDER_ID
 ```
 ![firebase](https://image.ibb.co/maGOnS/image.png)
 
+
+**Google Analytics**
+```
+REACT_APP_GA_TRACKING_NUMBER  # Google Analytics tracking number
+```
+
+
 **Hotjar**
 ```
-HJID  # Hotjar ID
-HJSV  # Hotjar Snippet Version
+REACT_APP_HJID  # Hotjar ID
+REACT_APP_HJSV  # Hotjar Snippet Version
 ```
 
 ## Recommended Dev Tools
