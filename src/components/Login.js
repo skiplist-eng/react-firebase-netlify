@@ -45,7 +45,7 @@ class Login extends Component {
         }]);
 
         const email = this.emailInput.value;
-        const password = this.passwordInput.value;
+        // const password = this.passwordInput.value;
 
         app.auth().fetchProvidersForEmail(email)
             .then((providers) => {
