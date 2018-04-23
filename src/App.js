@@ -4,6 +4,8 @@ import Analytics from 'react-router-ga';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Login from './components/Login';
+
 import ChordEditor from './components/ChordEditor';
 import SongList from './components/SongList';
 import {base} from './base'
@@ -58,11 +60,14 @@ class App extends Component {
         return (
             <div style={{maxWidth: "1160px", margin: "0 auto"}}>
                 <BrowserRouter>
-                    <Analytics id={this.googleAnalytics.gaTrackingNumber}>
+                    <Analytics id={this.googleAnalytics.gaTrackingNumber} debug>
                         <div>
-                            <Header/>
+                            <Header authenticated={this.state.authenticated}/>
                             <div className="main-content" style={{padding: "1em"}}>
                                 <div className="workspace">
+                                    <Route exact path="/login" component={Login}/>
+
+
                                     <Route exact path="/songs" render={(props) => {
                                         return (
                                             <SongList songs={this.state.songs}/>
