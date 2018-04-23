@@ -19,6 +19,7 @@ class Header extends Component {
                             <span className="pt-navbar-divider"/>
                             <button className="pt-button pt-minimal pt-icon-user"/>
                             <button className="pt-button pt-minimal pt-icon-cog"/>
+                            <Link className="pt-button minimal pt-icon-log-out" to="/logout" aria-label="Log Out"/>
                         </div>
                     )
                     : (

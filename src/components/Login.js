@@ -43,6 +43,25 @@ class Login extends Component {
             email: this.emailInput.value,
             password: this.passwordInput.value
         }]);
+
+        const email = this.emailInput.value;
+        const password = this.passwordInput.value;
+
+        app.auth().fetchProvidersForEmail(email)
+            .then((providers) => {
+                if (providers.length === 0) {
+                    // create user
+                    // return app.auth().createUserWithEmailAndPassword(email, password);
+                } else if (providers.indexOf("password") === -1) {
+                    this.loginForm.reset();
+                    this.toaster.show({intent: Intent.WARNING, message: "Try alternative login"})
+                } else {
+                    // sign user in
+                }
+            })
+            .catch((error) => {
+                this.toaster.show({intent: Intent.DANGER, message: error.message})
+            })
     }
 
     render() {
