@@ -45,18 +45,26 @@ class Login extends Component {
         }]);
 
         const email = this.emailInput.value;
-        // const password = this.passwordInput.value;
+        const password = this.passwordInput.value;
 
         app.auth().fetchProvidersForEmail(email)
             .then((providers) => {
                 if (providers.length === 0) {
                     // create user
-                    // return app.auth().createUserWithEmailAndPassword(email, password);
+                    return app.auth().createUserWithEmailAndPassword(email, password);
                 } else if (providers.indexOf("password") === -1) {
+                    // previously used facebook
                     this.loginForm.reset();
                     this.toaster.show({intent: Intent.WARNING, message: "Try alternative login"})
                 } else {
-                    // sign user in
+                    // sign in
+                    return app.auth().signInWithEmailAndPassword(email, password);
+                }
+            })
+            .then((user) => {
+                if (user && user.email) {
+                    this.loginForm.reset();
+                    this.setState({redirect: true})
                 }
             })
             .catch((error) => {
