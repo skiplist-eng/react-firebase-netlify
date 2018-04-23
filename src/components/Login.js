@@ -27,7 +27,6 @@ class Login extends Component {
     authWithFacebook() {
         console.log("authenticated with facebook");
 
-
         app.auth().signInWithPopup(facebookProvider)
             .then((result, error) => {
                 if (error) {

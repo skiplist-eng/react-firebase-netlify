@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Analytics from 'react-router-ga';
+import {Spinner} from '@blueprintjs/core';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -8,7 +9,7 @@ import Login from './components/Login';
 
 import ChordEditor from './components/ChordEditor';
 import SongList from './components/SongList';
-import {base} from './base'
+import {app, base} from './base'
 
 import Hotjar from './heatmap/hotjar'
 import GoogleAnalytics from "./analytics/googleAnalytics";
@@ -16,10 +17,13 @@ import GoogleAnalytics from "./analytics/googleAnalytics";
 class App extends Component {
     constructor() {
         super();
+
         this.addSong = this.addSong.bind(this);
         this.updateSong = this.updateSong.bind(this);
         this.state = {
-            songs: {}
+            songs: {},
+            authenticated: false,
+            loading: true
         };
 
         this.hotjar = new Hotjar();
@@ -46,6 +50,21 @@ class App extends Component {
     }
 
     componentWillMount() {
+        this.removeAuthListener = app.auth().onAuthStateChanged(
+            (user) => {
+                if (user) {
+                    this.setState({
+                        authenticated: true,
+                        loading: false
+                    })
+                } else {
+                    this.setState({
+                        authenticated: false,
+                        loading: false
+                    })
+                }
+            });
+
         this.songsRef = base.syncState('songs', {
             context: this,
             state: 'songs'
@@ -53,10 +72,20 @@ class App extends Component {
     }
 
     componentWillUnmount() {
+        this.removeAuthListener();
         base.removeBinding(this.songsRef);
     }
 
     render() {
+        if (this.state.loading === true) {
+            return (
+                <div style={{textAlign: "center", position: "absolute", top: "25%", left: "50%"}}>
+                    <h3>Loading</h3>
+                    <Spinner/>
+                </div>
+            )
+        }
+
         return (
             <div style={{maxWidth: "1160px", margin: "0 auto"}}>
                 <BrowserRouter>
