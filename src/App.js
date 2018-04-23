@@ -6,6 +6,7 @@ import {Spinner} from '@blueprintjs/core';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Login from './components/Login';
+import Logout from './components/Logout';
 
 import ChordEditor from './components/ChordEditor';
 import SongList from './components/SongList';
@@ -95,7 +96,7 @@ class App extends Component {
                             <div className="main-content" style={{padding: "1em"}}>
                                 <div className="workspace">
                                     <Route exact path="/login" component={Login}/>
-
+                                    <Route exact path="/logout" component={Logout}/>
 
                                     <Route exact path="/songs" render={(props) => {
                                         return (
