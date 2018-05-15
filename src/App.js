@@ -11,8 +11,6 @@ import Logout from './components/Logout';
 import ChordEditor from './components/ChordEditor';
 import SongList from './components/SongList';
 
-import FullScreen from './components/fileUpload/dropzone/FullScreen'
-
 import {app, base} from './base'
 
 import Hotjar from './heatmap/hotjar'
@@ -135,7 +133,6 @@ class App extends Component {
                                         return <Login setCurrentUser={this.setCurrentUser} {...props} />
                                     }}/>
                                     <Route exact path="/logout" component={Logout}/>
-                                    <Route exact path="/dropzone" component={FullScreen}/>
                                     <AuthenticatedRoute exact path="/songs"
                                                         authenticated={this.state.authenticated}
                                                         component={SongList} songs={this.state.songs}/>
