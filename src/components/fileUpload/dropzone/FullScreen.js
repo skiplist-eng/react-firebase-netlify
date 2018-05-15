@@ -24,6 +24,12 @@ class FullScreen extends Component {
     }
 
     onDrop(files) {
+        let reader = new FileReader();
+        reader.addEventListener("loadend", function (event) {
+            console.log(event.target.result);
+        });
+        reader.readAsText(files[0]);
+
         this.setState({
             files,
             dropzoneActive: false
@@ -35,7 +41,6 @@ class FullScreen extends Component {
             accept: event.target.value
         });
     }
-
     render() {
         const {accept, files, dropzoneActive} = this.state;
         const overlayStyle = {
@@ -50,8 +55,14 @@ class FullScreen extends Component {
             color: '#fff'
         };
 
+        const filesList = files.map(
+            f => <li>{f.name} - {f.size} bytes : {f.result}</li>
+        );
+
         return (
             <Dropzone
+                maxSize={5242880}
+                multiple={false}
                 disableClick
                 style={{position: "relative"}}
                 accept={accept}
@@ -71,9 +82,7 @@ class FullScreen extends Component {
 
                     <h2>Dropped files</h2>
                     <ul>
-                        {
-                            files.map(f => <li>{f.name} - {f.size} bytes</li>)
-                        }
+                        {filesList}
                     </ul>
 
                 </div>

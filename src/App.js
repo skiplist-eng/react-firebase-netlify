@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route} from 'react-router-dom';
 import Analytics from 'react-router-ga';
 import {Spinner} from '@blueprintjs/core';
 
@@ -18,16 +18,28 @@ import {app, base} from './base'
 import Hotjar from './heatmap/hotjar'
 import GoogleAnalytics from "./analytics/googleAnalytics";
 
+function AuthenticatedRoute({component: Component, authenticated, ...rest}) {
+    return (
+        <Route
+            {...rest}
+            render={(props) => authenticated === true
+                ? <Component {...props} {...rest} />
+                : <Redirect to={{pathname: '/login', state: {from: props.location}}}/>}/>
+    )
+}
 class App extends Component {
     constructor() {
         super();
 
         this.addSong = this.addSong.bind(this);
         this.updateSong = this.updateSong.bind(this);
+        this.setCurrentUser = this.setCurrentUser.bind(this);
+
         this.state = {
-            songs: {},
             authenticated: false,
-            loading: true
+            currentUser: null,
+            loading: true,
+            songs: {},
         };
 
         this.hotjar = new Hotjar();
@@ -40,7 +52,8 @@ class App extends Component {
         songs[id] = {
             id: id,
             title: title,
-            chordpro: ""
+            chordpro: "",
+            owner: this.state.currentUser.uid
         };
 
         this.setState({songs});
@@ -53,26 +66,46 @@ class App extends Component {
         this.setState({songs});
     }
 
+    setCurrentUser(user) {
+        if (user) {
+            this.setState({
+                authenticated: true,
+                currentUser: user,
+            })
+        } else {
+            this.setState({
+                authenticated: false,
+                currentUser: null,
+            })
+        }
+    }
+
     componentWillMount() {
         this.removeAuthListener = app.auth().onAuthStateChanged(
             (user) => {
                 if (user) {
                     this.setState({
                         authenticated: true,
+                        currentUser: user,
                         loading: false
+                    });
+
+                    this.songsRef = base.syncState(`songs/${user.uid}`, {
+                        context: this,
+                        state: 'songs'
                     })
                 } else {
                     this.setState({
                         authenticated: false,
+                        currentUser: null,
                         loading: false
-                    })
+                    });
+
+                    base.removeBinding(this.songsRef);
                 }
             });
 
-        this.songsRef = base.syncState('songs', {
-            context: this,
-            state: 'songs'
-        })
+
     }
 
     componentWillUnmount() {
@@ -95,17 +128,17 @@ class App extends Component {
                 <BrowserRouter>
                     <Analytics id={this.googleAnalytics.gaTrackingNumber} debug>
                         <div>
-                            <Header authenticated={this.state.authenticated}/>
+                            <Header addSong={this.addSong} authenticated={this.state.authenticated}/>
                             <div className="main-content" style={{padding: "1em"}}>
                                 <div className="workspace">
-                                    <Route exact path="/login" component={Login}/>
+                                    <Route exact path="/login" render={(props) => {
+                                        return <Login setCurrentUser={this.setCurrentUser} {...props} />
+                                    }}/>
                                     <Route exact path="/logout" component={Logout}/>
                                     <Route exact path="/dropzone" component={FullScreen}/>
-                                    <Route exact path="/songs" render={(props) => {
-                                        return (
-                                            <SongList songs={this.state.songs}/>
-                                        )
-                                    }}/>
+                                    <AuthenticatedRoute exact path="/songs"
+                                                        authenticated={this.state.authenticated}
+                                                        component={SongList} songs={this.state.songs}/>
 
                                     <Route path="/songs/:songId" render={(props) => {
                                         const song = this.state.songs[props.match.params.songId];

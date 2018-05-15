@@ -1,8 +1,20 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-
+import {Popover, PopoverInteractionKind, Position} from '@blueprintjs/core'
+import NewSongPopoverForm from './NewSongPopoverForm'
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.closePopover = this.closePopover.bind(this);
+        this.state = {
+            popoverOpen: false
+        }
+    }
+
+    closePopover() {
+        this.setState({popoverOpen: false})
+    }
     render() {
         return (
             <nav className="pt-navbar">
@@ -16,6 +28,18 @@ class Header extends Component {
                     ? (
                         <div className="pt-navbar-group pt-align-right">
                             <Link className="pt-button pt-minimal pt-icon-music" to="/songs">Songs</Link>
+                            <Popover
+                                content={(<NewSongPopoverForm
+                                    addSong={this.props.addSong}
+                                    postSubmitHandler={this.closePopover}/>)}
+
+                                interactionKind={PopoverInteractionKind.CLICK}
+                                isOpen={this.state.popoverOpen}
+                                onInteraction={(state) => this.setState({popoverOpen: state})}
+                                position={Position.BOTTOM}>
+
+                                <button className="pt-button pt-minimal pt-icon-add" aria-label="add new song"/>
+                            </Popover>
                             <span className="pt-navbar-divider"/>
                             <button className="pt-button pt-minimal pt-icon-user"/>
                             <button className="pt-button pt-minimal pt-icon-cog"/>

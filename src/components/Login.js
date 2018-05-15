@@ -28,10 +28,11 @@ class Login extends Component {
         console.log("authenticated with facebook");
 
         app.auth().signInWithPopup(facebookProvider)
-            .then((result, error) => {
+            .then((user, error) => {
                 if (error) {
                     this.toaster.show({intent: Intent.DANGER, message: "Unable to sign in with Facebook"})
                 } else {
+                    this.props.setCurrentUser(user);
                     this.setState({redirect: true})
                 }
             });
@@ -64,6 +65,7 @@ class Login extends Component {
             .then((user) => {
                 if (user && user.email) {
                     this.loginForm.reset();
+                    this.props.setCurrentUser(user);
                     this.setState({redirect: true})
                 }
             })
@@ -73,9 +75,12 @@ class Login extends Component {
     }
 
     render() {
+        const {from} = this.props.location.state || {from: {pathname: '/'}};
+
         if (this.state.redirect === true) {
-            return <Redirect to='/'/>
+            return <Redirect to={from}/>
         }
+
         return (
             <div style={loginStyles}>
                 <Toaster ref={(element) => {
